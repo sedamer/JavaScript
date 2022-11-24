@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Direnc Renk Kodları</title>
+    <style>
+        .siyah      { background-color: black;  color: white; }
+        .kahverengi { background-color: brown; }
+        .kirmizi    { background-color: red;   }
+        .turuncu    { background-color: orange;}
+        .sari       { background-color: yellow;}
+        .yesil      { background-color: green; }
+        .mavi       { background-color: blue;  }
+        .mor        { background-color: purple;}
+        .gri        { background-color: gray;  }
+        .beyaz      { background-color: white;  color: black; }
+        .altin      { background-color: gold;  }
+        .gumus      { background-color: silver;}
+        .bos        { background-color: white; }
+
+    </style>
+</head>
+<body>
+    <label>1.RENK :
+        <select name="renkler" id="renk1" onchange="Hesapla(this,1)">
+            <option class="beyaz">RENK SECINIZ</option>
+            <option class="siyah"  value="0">SIYAH</option>
+            <option class="kahverengi"  value="1">KAHVERENGI</option>
+            <option class="kirmizi"    value="2">KIRMIZI</option>
+            <option class="turuncu" value="3">TURUNCU</option>
+            <option class="sari" value="4">SARI</option>
+            <option class="yesil"  value="5">YESIL</option>
+            <option class="mavi"   value="6">MAVI</option>
+            <option class="mor" value="7">MOR</option>
+            <option class="gri"   value="8">GRI</option>
+            <option class="beyaz"  value="9">BEYAZ</option>
+          </select>
+    </label>
+    <br><br>
+    <label>2.RENK :
+        <select name="renkler" id="renk2" onchange="Hesapla(this)">
+            <option class="beyaz">RENK SECINIZ</option>
+            <option class="siyah"  value="0">SIYAH</option>
+            <option class="kahverengi"  value="1">KAHVERENGI</option>
+            <option class="kirmizi"    value="2">KIRMIZI</option>
+            <option class="turuncu" value="3">TURUNCU</option>
+            <option class="sari" value="4">SARI</option>
+            <option class="yesil"  value="5">YESIL</option>
+            <option class="mavi"   value="6">MAVI</option>
+            <option class="mor" value="7">MOR</option>
+            <option class="gri"   value="8">GRI</option>
+            <option class="beyaz"  value="9">BEYAZ</option>
+          </select>
+    </label>
+    <br><br>
+    <label>3.RENK :
+        <select name="renkler" id="renk3" onchange="Hesapla(this)">
+            <option class="beyaz">RENK SECINIZ</option>
+            <option class="siyah"  value="0">SIYAH</option>
+            <option class="kahverengi"  value="1">KAHVERENGI</option>
+            <option class="kirmizi"    value="2">KIRMIZI</option>
+            <option class="turuncu" value="3">TURUNCU</option>
+            <option class="sari" value="4">SARI</option>
+            <option class="yesil"  value="5">YESIL</option>
+            <option class="mavi"   value="6">MAVI</option>
+            <option class="mor" value="7">MOR</option>
+            <option class="gri"   value="8">GRI</option>
+            <option class="beyaz"  value="9">BEYAZ</option>
+            <option class="altin" value="10">ALTIN</option>
+            <option class="gumus" value="11">GUMUS</option>
+          </select>
+    </label>
+    <br><br>
+    <label>4.RENK :
+        <select name="renkler" id="renk4" onchange="Hesapla(this)">
+            <option class="bos">RENK SECINIZ</option>
+            <option class="kahverengi" value="1">KAHVERENGI</option>
+            <option class="kirmizi" value="2">KIRMIZI</option>
+            <option class="altin" value="10">ALTIN</option>
+            <option class="gumus" value="11">GUMUS</option>
+          </select>
+    </label>
+    <br><br>
+    <label>BİRİM
+     <select id="birim" onchange="Hesapla(this)">
+      <option value="1">Ω</option>
+      <option value="1000">kΩ</option>
+      <option value="1000000">mΩ</option> 
+     </select>
+    </label>
+
+    <div id="Sonuc"></div>
+
+    <script>
+       function renkBul(number)    
+       {
+        var renk="";
+        if(number==0) renk="siyah";
+        if(number==1) renk="kahverengi";
+        if(number==2) renk="kirmizi";
+        if(number==3) renk="turuncu";
+        if(number==4) renk="sari";
+        if(number==5) renk="yesil";
+        if(number==6) renk="mavi";
+        if(number==7) renk="mor";
+        if(number==8) renk="gri";
+        if(number==9) renk="beyaz";
+        if(number==10) renk="altin";
+        if(number==11) renk="gumus";
+            return(renk);
+  
+       }
+       function Hesapla(Obje) 
+       {
+        secilenSayi=Obje.value;
+        var renk=renkBul(secilenSayi);
+        Obje.className = renk;
+
+        sayi1=document.getElementById("renk1").value;
+        sayi2=document.getElementById("renk2").value;
+        sayi3=document.getElementById("renk3").value;
+        sayi4=document.getElementById("renk4").value;
+
+      if(sayi4 >0)
+      {  
+        var katsayi=Number(sayi1 + sayi2);
+        var sonuc = (katsayi*Math.pow(10,sayi3))/birim.value;
+        var sembol = birim.options[birim.selectedIndex].text;
+
+        var tolerans = 0;
+        if(sayi4 ==  10) { tolerans = 5; }
+        else if(sayi4 == 11) { tolerans = 10;}
+        else { tolerans = sayi4; }
+
+        var enaz=sonuc*(100-Number(tolerans))/100;
+        var encok=sonuc*(100+Number(tolerans))/100;
+
+        Sonuc.innerHTML="<h3>Direnç Değeri: "+sonuc+" "+sembol+"</h3>"+
+        "<h3>Tolerans:%"+tolerans+"</h3>"+
+        "<h3>Direnç Aralığı: "+enaz+ " "+ sembol+" - "+encok+ " "+ sembol+"</h3>";
+
+        }
+    }
+  
+    </script>
+</body>
+</html>
